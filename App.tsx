@@ -1,24 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { SignIn, SignUp } from './screens';
+
+const Stack = createStackNavigator();
 
 const App: React.FC = () => {
   return (
     <NavigationContainer>
-      <SafeAreaView>
-        <View style={styles.container}>
-          <Text>Dicision App</Text>
-        </View>
-      </SafeAreaView>
+      <Stack.Navigator>
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-});
 
 export default App;
