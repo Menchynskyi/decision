@@ -8,11 +8,37 @@ export const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#616161',
   },
   mainInfo: {
     fontSize: 50,
     color: '#333333',
+  },
+  form: {
+    width: 300,
+  },
+  input: {
+    marginBottom: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#333333',
+    borderRadius: 5,
+    fontSize: 18,
+  },
+  submitButton: {
+    paddingVertical: 10,
+    marginBottom: 10,
+    backgroundColor: '#87ace6',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  disabled: {
+    backgroundColor: '#bababa',
+  },
+  submitText: {
+    fontSize: 18,
+    textTransform: 'uppercase',
+    color: '#ffffff',
   },
 });
