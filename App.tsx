@@ -1,24 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+
+const App: React.FC = () => {
+  return (
+    <NavigationContainer>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <Text>Dicision App</Text>
+        </View>
+      </SafeAreaView>
+    </NavigationContainer>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  content: {
-    fontSize: 60,
+    backgroundColor: 'white',
   },
 });
-
-const App = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.content}>Dicision App</Text>
-    </View>
-  );
-};
 
 export default App;
