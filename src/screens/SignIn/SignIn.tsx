@@ -15,7 +15,7 @@ export const SignIn: React.FC = () => {
       username: '',
       password: '',
     },
-    onSubmit: (val) => {
+    onSubmit: val => {
       console.log(val);
     },
   });

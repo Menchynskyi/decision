@@ -11,13 +11,14 @@ export const useForm = <T>({ initialValues, onSubmit }: Config<T>) => {
   const [values, setValues] = useState<T>(initialValues);
 
   const handleSubmit = () => {
-    if (Object.values(values).every((value) => value.trim())) {
+    if (Object.values(values).every(value => value.trim())) {
       onSubmit(values);
+      setValues(initialValues);
     }
   };
 
   const handleChange = (fieldName: keyof T) => (text: string) => {
-    setValues((prevState) => ({ ...prevState, [fieldName]: text }));
+    setValues(prev => ({ ...prev, [fieldName]: text }));
   };
 
   const createChangeHandlers = (val: T): ChangeHandler<T> => {
@@ -29,7 +30,7 @@ export const useForm = <T>({ initialValues, onSubmit }: Config<T>) => {
 
   const changeHandlers = createChangeHandlers(values);
 
-  const dirty = !Object.values(values).some((value) => !!value);
+  const dirty = !Object.values(values).some(value => !!value);
 
   return {
     values,
