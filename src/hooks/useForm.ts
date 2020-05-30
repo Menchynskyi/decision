@@ -29,12 +29,12 @@ export const useForm = <T>({ initialValues, onSubmit }: Config<T>) => {
 
   const changeHandlers = createChangeHandlers(values);
 
-  const disabled = Object.values(values).some((value) => !value);
+  const dirty = !Object.values(values).some((value) => !!value);
 
   return {
     values,
     handleSubmit,
     changeHandlers,
-    disabled,
+    dirty,
   };
 };

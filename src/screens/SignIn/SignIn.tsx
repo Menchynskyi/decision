@@ -10,7 +10,7 @@ export const SignIn: React.FC = () => {
     navigation.navigate('SignUp');
   };
 
-  const { changeHandlers, handleSubmit, values, disabled } = useForm({
+  const { changeHandlers, handleSubmit, values, dirty } = useForm({
     initialValues: {
       username: '',
       password: '',
@@ -36,8 +36,8 @@ export const SignIn: React.FC = () => {
           onChangeText={changeHandlers.password}
           secureTextEntry
         />
-        <TouchableOpacity disabled={disabled} onPress={handleSubmit}>
-          <View style={[styles.submitButton, disabled && styles.disabled]}>
+        <TouchableOpacity disabled={dirty} onPress={handleSubmit}>
+          <View style={[styles.submitButton, dirty && styles.disabled]}>
             <Text style={styles.submitText}>Sign In</Text>
           </View>
         </TouchableOpacity>
