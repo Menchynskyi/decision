@@ -1,19 +1,52 @@
 import { useState, useCallback, useMemo } from 'react';
 
+type ValidationSchema<T> = { [K in keyof T]?: (value: T[keyof T]) => string };
+
 type Config<T> = {
   initialValues: T;
   onSubmit: (values: T) => void;
+  validationSchema?: ValidationSchema<T>;
 };
 
 type ChangeHandler<T> = { [K in keyof T]: (text: string) => void };
 
-export const useForm = <T>({ initialValues, onSubmit }: Config<T>) => {
+const createInitialErrorsState = <T>(initialValues: T): T => {
+  return Object.keys(initialValues).reduce(
+    (acum, key) => ({ ...acum, [key]: '' }),
+    {} as T
+  );
+};
+
+export const useForm = <T>({
+  initialValues,
+  onSubmit,
+  validationSchema,
+}: Config<T>) => {
   const [values, setValues] = useState<T>(initialValues);
 
+  const initialErrors = useMemo(
+    () => createInitialErrorsState(initialValues),
+    []
+  );
+  const [errors, setErrors] = useState<T>(initialErrors);
+
   const handleSubmit = () => {
-    if (Object.values(values).every(value => value.trim())) {
+    let currentErrors = { ...errors };
+    if (validationSchema) {
+      Object.keys(validationSchema).map(key => {
+        const validate = validationSchema[key as keyof T];
+        if (validate) {
+          const value = values[key as keyof T];
+          const errorMessage = validate(value);
+          setErrors(prev => ({ ...prev, [key]: errorMessage }));
+          currentErrors = { ...currentErrors, [key]: errorMessage };
+        }
+      });
+    }
+    if (Object.values(currentErrors).every(error => !error)) {
       onSubmit(values);
       setValues(initialValues);
+      setErrors(initialErrors);
     }
   };
 
@@ -37,6 +70,7 @@ export const useForm = <T>({ initialValues, onSubmit }: Config<T>) => {
 
   return {
     values,
+    errors,
     handleSubmit,
     changeHandlers,
     dirty,
