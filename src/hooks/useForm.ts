@@ -24,12 +24,12 @@ export const useForm = <T>({ initialValues, onSubmit }: Config<T>) => {
     []
   );
 
-  const createChangeHandlers = (vals: T): ChangeHandler<T> => {
+  const createChangeHandlers = useCallback((vals: T): ChangeHandler<T> => {
     return Object.keys(vals).reduce(
       (acum, key) => ({ ...acum, [key]: handleChange(key as keyof T) }),
       {} as ChangeHandler<T>
     );
-  };
+  }, []);
 
   const changeHandlers = useMemo(() => createChangeHandlers(values), []);
 
