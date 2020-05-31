@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 type Config<T> = {
   initialValues: T;
@@ -17,18 +17,21 @@ export const useForm = <T>({ initialValues, onSubmit }: Config<T>) => {
     }
   };
 
-  const handleChange = (fieldName: keyof T) => (text: string) => {
-    setValues(prev => ({ ...prev, [fieldName]: text }));
-  };
+  const handleChange = useCallback(
+    (fieldName: keyof T) => (text: string) => {
+      setValues(prev => ({ ...prev, [fieldName]: text }));
+    },
+    []
+  );
 
-  const createChangeHandlers = (val: T): ChangeHandler<T> => {
-    return Object.keys(val).reduce(
+  const createChangeHandlers = (vals: T): ChangeHandler<T> => {
+    return Object.keys(vals).reduce(
       (acum, key) => ({ ...acum, [key]: handleChange(key as keyof T) }),
       {} as ChangeHandler<T>
     );
   };
 
-  const changeHandlers = createChangeHandlers(values);
+  const changeHandlers = useMemo(() => createChangeHandlers(values), []);
 
   const dirty = !Object.values(values).some(value => !!value);
 

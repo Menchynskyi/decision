@@ -29,6 +29,7 @@ export const SignUp: React.FC = () => {
           style={styles.input}
           value={values.email}
           onChangeText={changeHandlers.email}
+          keyboardType="email-address"
         />
         <TextInput
           placeholder="Username"
