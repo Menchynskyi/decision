@@ -3,14 +3,13 @@ import {
   Text,
   View,
   TouchableOpacity,
-  TextInput,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'hooks';
+import { Input } from 'components';
 import { styles } from './SignUp.style';
-import { useForm } from '../../hooks';
-import { Input } from '../../components';
 
 export const SignUp: React.FC = () => {
   const navigation = useNavigation();

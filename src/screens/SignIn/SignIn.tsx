@@ -7,9 +7,9 @@ import {
   Keyboard,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Input } from 'components';
+import { useForm } from 'hooks';
 import { styles } from './SignIn.style';
-import { useForm } from '../../hooks';
-import { Input } from '../../components';
 
 export const SignIn: React.FC = () => {
   const navigation = useNavigation();
