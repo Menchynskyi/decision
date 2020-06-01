@@ -10,6 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './SignUp.style';
 import { useForm } from '../../hooks';
+import { Input } from '../../components';
 
 export const SignUp: React.FC = () => {
   const navigation = useNavigation();
@@ -32,22 +33,19 @@ export const SignUp: React.FC = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <View style={styles.form}>
-          <TextInput
+          <Input
             placeholder="Email"
-            style={styles.input}
             value={values.email}
             onChangeText={changeHandlers.email}
             keyboardType="email-address"
           />
-          <TextInput
+          <Input
             placeholder="Username"
-            style={styles.input}
             value={values.username}
             onChangeText={changeHandlers.username}
           />
-          <TextInput
+          <Input
             placeholder="Password"
-            style={styles.input}
             value={values.password}
             onChangeText={changeHandlers.password}
             secureTextEntry

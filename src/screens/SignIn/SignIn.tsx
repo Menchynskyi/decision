@@ -3,13 +3,13 @@ import {
   Text,
   View,
   TouchableOpacity,
-  TextInput,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './SignIn.style';
 import { useForm } from '../../hooks';
+import { Input } from '../../components';
 
 export const SignIn: React.FC = () => {
   const navigation = useNavigation();
@@ -31,15 +31,13 @@ export const SignIn: React.FC = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <View style={styles.form}>
-          <TextInput
+          <Input
             placeholder="Username or Email"
-            style={styles.input}
             value={values.username}
             onChangeText={changeHandlers.username}
           />
-          <TextInput
+          <Input
             placeholder="Password"
-            style={styles.input}
             value={values.password}
             onChangeText={changeHandlers.password}
             secureTextEntry

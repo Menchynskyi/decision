@@ -4,8 +4,8 @@ type ValidationSchema<T> = { [K in keyof T]?: (value: T[keyof T]) => string };
 
 type Config<T> = {
   initialValues: T;
-  onSubmit: (values: T) => void;
   validationSchema?: ValidationSchema<T>;
+  onSubmit: (values: T) => void;
 };
 
 type ChangeHandler<T> = { [K in keyof T]: (text: string) => void };

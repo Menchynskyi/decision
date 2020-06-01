@@ -18,14 +18,6 @@ export const styles = StyleSheet.create({
   form: {
     width: 300,
   },
-  input: {
-    marginBottom: 10,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#333333',
-    borderRadius: 5,
-    fontSize: 18,
-  },
   submitButton: {
     paddingVertical: 10,
     marginBottom: 10,
