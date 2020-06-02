@@ -17,13 +17,29 @@ export const SignIn: React.FC = () => {
     navigation.navigate('SignUp');
   };
 
-  const { changeHandlers, handleSubmit, values, dirty } = useForm({
+  const { changeHandlers, handleSubmit, values, dirty, errors } = useForm({
     initialValues: {
       username: '',
       password: '',
     },
     onSubmit: val => {
       console.log(val);
+    },
+    validationSchema: {
+      username: val => {
+        let error = '';
+        if (val.length === 0) {
+          error = 'requiered';
+        }
+        return error;
+      },
+      password: val => {
+        let error = '';
+        if (val.length === 0) {
+          error = 'requiered';
+        }
+        return error;
+      },
     },
   });
 
@@ -35,12 +51,14 @@ export const SignIn: React.FC = () => {
             placeholder="Username or Email"
             value={values.username}
             onChangeText={changeHandlers.username}
+            errorMessage={errors.username}
           />
           <Input
             placeholder="Password"
             value={values.password}
             onChangeText={changeHandlers.password}
             secureTextEntry
+            errorMessage={errors.password}
           />
           <TouchableOpacity disabled={dirty} onPress={handleSubmit}>
             <View style={[styles.submitButton, dirty && styles.disabled]}>
