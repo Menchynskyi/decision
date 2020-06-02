@@ -9,6 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { Input } from 'components';
 import { useForm } from 'hooks';
+import { validatePassword, validateUsername } from 'utils';
 import { styles } from './SignIn.style';
 
 export const SignIn: React.FC = () => {
@@ -26,20 +27,8 @@ export const SignIn: React.FC = () => {
       console.log(val);
     },
     validationSchema: {
-      username: val => {
-        let error = '';
-        if (val.length === 0) {
-          error = 'requiered';
-        }
-        return error;
-      },
-      password: val => {
-        let error = '';
-        if (val.length === 0) {
-          error = 'requiered';
-        }
-        return error;
-      },
+      username: validateUsername,
+      password: validatePassword,
     },
   });
 

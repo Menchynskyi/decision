@@ -9,6 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'hooks';
 import { Input } from 'components';
+import { validateEmail, validateUsername, validatePassword } from 'utils';
 import { styles } from './SignUp.style';
 
 export const SignUp: React.FC = () => {
@@ -17,7 +18,7 @@ export const SignUp: React.FC = () => {
     navigation.navigate('SignIn');
   };
 
-  const { changeHandlers, handleSubmit, dirty, values } = useForm({
+  const { changeHandlers, handleSubmit, dirty, values, errors } = useForm({
     initialValues: {
       email: '',
       username: '',
@@ -25,6 +26,11 @@ export const SignUp: React.FC = () => {
     },
     onSubmit: val => {
       console.log(val);
+    },
+    validationSchema: {
+      email: validateEmail,
+      username: validateUsername,
+      password: validatePassword,
     },
   });
 
@@ -37,17 +43,20 @@ export const SignUp: React.FC = () => {
             value={values.email}
             onChangeText={changeHandlers.email}
             keyboardType="email-address"
+            errorMessage={errors.email}
           />
           <Input
             placeholder="Username"
             value={values.username}
             onChangeText={changeHandlers.username}
+            errorMessage={errors.username}
           />
           <Input
             placeholder="Password"
             value={values.password}
             onChangeText={changeHandlers.password}
             secureTextEntry
+            errorMessage={errors.password}
           />
           <TouchableOpacity disabled={dirty} onPress={handleSubmit}>
             <View style={[styles.submitButton, dirty && styles.disabled]}>

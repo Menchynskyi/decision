@@ -11,6 +11,7 @@ module.exports = api => {
             components: './src/components/',
             hooks: './src/hooks/',
             screens: './src/screens/',
+            utils: './src/utils/',
           },
         },
       ],
