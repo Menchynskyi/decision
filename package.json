@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "client": "npm run start --prefix client"
+    "client": "npm run start --prefix client",
+    "server": "npm run dev --prefix server"
   },
   "repository": {
     "type": "git",
