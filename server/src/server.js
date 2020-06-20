@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { config } from 'dotenv';
 import { connect } from './utils/db';
+import { signup, signin } from './utils/auth';
 
 export const app = express();
 config();
@@ -16,6 +17,12 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan('dev'));
+
+app.get('/signup', (req, res) => {
+  res.status(200).send({ message: 'test' });
+});
+app.post('/signup', signup);
+app.post('/signin', signin);
 
 export const start = async () => {
   try {
