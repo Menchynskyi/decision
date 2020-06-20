@@ -8,8 +8,9 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Input } from 'components';
-import { useForm } from 'hooks';
+import { useForm, useAuthDispatch } from 'hooks';
 import { validatePassword, validateUsername } from 'utils';
+import { signIn } from 'api';
 import { styles } from './SignIn.style';
 
 export const SignIn: React.FC = () => {
@@ -17,6 +18,7 @@ export const SignIn: React.FC = () => {
   const handlePress = () => {
     navigation.navigate('SignUp');
   };
+  const dispatch = useAuthDispatch();
 
   const { changeHandlers, handleSubmit, values, dirty, errors } = useForm({
     initialValues: {
@@ -24,7 +26,7 @@ export const SignIn: React.FC = () => {
       password: '',
     },
     onSubmit: val => {
-      console.log(val);
+      signIn(dispatch, val);
     },
     validationSchema: {
       username: validateUsername,
