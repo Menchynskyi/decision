@@ -3,12 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SignIn, SignUp } from 'screens';
 import { useAuthState } from 'hooks';
-import { View, Text } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 
 const Stack = createStackNavigator();
 
 export const App: React.FC = () => {
-  const { isLoggedIn } = useAuthState();
+  const { isLoggedIn, user } = useAuthState();
 
   if (!isLoggedIn)
     return (
@@ -21,9 +21,9 @@ export const App: React.FC = () => {
     );
 
   return (
-    <View>
-      <Text>Authed App</Text>
-    </View>
+    <SafeAreaView>
+      <Text>{`Hello ${user?.username}`}</Text>
+    </SafeAreaView>
   );
 };
 

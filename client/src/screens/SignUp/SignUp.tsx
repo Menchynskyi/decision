@@ -7,9 +7,10 @@ import {
   Keyboard,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useForm } from 'hooks';
+import { useForm, useAuthDispatch } from 'hooks';
 import { Input } from 'components';
 import { validateEmail, validateUsername, validatePassword } from 'utils';
+import { signUp } from 'api';
 import { styles } from './SignUp.style';
 
 export const SignUp: React.FC = () => {
@@ -17,6 +18,7 @@ export const SignUp: React.FC = () => {
   const handlePress = () => {
     navigation.navigate('SignIn');
   };
+  const dispatch = useAuthDispatch();
 
   const { changeHandlers, handleSubmit, dirty, values, errors } = useForm({
     initialValues: {
@@ -25,7 +27,7 @@ export const SignUp: React.FC = () => {
       password: '',
     },
     onSubmit: val => {
-      console.log(val);
+      signUp(dispatch, val);
     },
     validationSchema: {
       email: validateEmail,

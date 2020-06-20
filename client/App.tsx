@@ -1,13 +1,13 @@
 import React from 'react';
 import { AuthProvider } from 'contexts';
-import AuthApp from 'App';
+import App from './src/App';
 
-const App: React.FC = () => {
+const DecisionApp: React.FC = () => {
   return (
     <AuthProvider>
-      <AuthApp />
+      <App />
     </AuthProvider>
   );
 };
 
-export default App;
+export default DecisionApp;

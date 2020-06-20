@@ -9,9 +9,9 @@ export type State = {
 export type Action =
   | {
       type: 'signIn';
-      payload: SignInPayload;
+      payload: User;
     }
-  | { type: 'signUp'; payload: SignUpPayload };
+  | { type: 'signUp'; payload: User };
 
 export type AuthContextState = {
   state: State;
@@ -30,11 +30,15 @@ const authReducer = (state: State, action: Action): State => {
     case 'signIn': {
       return {
         ...state,
+        isLoggedIn: true,
+        user: action.payload,
       };
     }
     case 'signUp': {
       return {
         ...state,
+        isLoggedIn: true,
+        user: action.payload,
       };
     }
     default: {
