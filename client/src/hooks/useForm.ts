@@ -45,8 +45,6 @@ export const useForm = <T>({
     }
     if (Object.values(currentErrors).every(error => !error)) {
       onSubmit(values);
-      setValues(initialValues);
-      setErrors(initialErrors);
     }
   };
 

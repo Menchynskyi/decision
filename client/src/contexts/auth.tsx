@@ -1,9 +1,18 @@
 import React, { createContext, useReducer } from 'react';
-import { User, SignInPayload, SignUpPayload } from 'types';
+import { User } from 'types';
 
 export type State = {
   isLoggedIn: boolean;
   user: User | null;
+  signUpError: {
+    isError: boolean;
+    errorMessage: string;
+  };
+  signInError: {
+    isError: boolean;
+    errorMessage: string;
+  };
+  isLoading: boolean;
 };
 
 export type Action =
@@ -12,7 +21,10 @@ export type Action =
       payload: User;
     }
   | { type: 'signUp'; payload: User }
-  | { type: 'signOut' };
+  | { type: 'signOut' }
+  | { type: 'signInError'; payload: string }
+  | { type: 'signUpError'; payload: string }
+  | { type: 'loading' };
 
 export type AuthContextState = {
   state: State;
@@ -24,6 +36,15 @@ type AuthProviderProps = { children: React.ReactNode };
 export const initialState: State = {
   isLoggedIn: false,
   user: null,
+  signInError: {
+    isError: false,
+    errorMessage: '',
+  },
+  signUpError: {
+    isError: false,
+    errorMessage: '',
+  },
+  isLoading: false,
 };
 
 const authReducer = (state: State, action: Action): State => {
@@ -33,6 +54,8 @@ const authReducer = (state: State, action: Action): State => {
         ...state,
         isLoggedIn: true,
         user: action.payload,
+        signInError: initialState.signInError,
+        isLoading: false,
       };
     }
     case 'signUp': {
@@ -40,13 +63,39 @@ const authReducer = (state: State, action: Action): State => {
         ...state,
         isLoggedIn: true,
         user: action.payload,
+        signUpError: initialState.signUpError,
+        isLoading: false,
       };
     }
     case 'signOut': {
       return {
+        ...initialState,
+      };
+    }
+    case 'signInError': {
+      return {
         ...state,
-        isLoggedIn: false,
-        user: null,
+        signInError: {
+          isError: true,
+          errorMessage: action.payload,
+        },
+        isLoading: false,
+      };
+    }
+    case 'signUpError': {
+      return {
+        ...state,
+        signUpError: {
+          isError: true,
+          errorMessage: action.payload,
+        },
+        isLoading: false,
+      };
+    }
+    case 'loading': {
+      return {
+        ...state,
+        isLoading: true,
       };
     }
     default: {
