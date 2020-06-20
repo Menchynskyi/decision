@@ -31,10 +31,10 @@ export const signIn = async (
 ) => {
   if (!Object.values(payload).every(field => field?.trim())) return;
   try {
-    const { data: user }: UserResponse = await axios.post(
-      `${apiUrl}/signIn`,
-      payload
-    );
+    const { data: user }: UserResponse = await axios.post(`${apiUrl}/signIn`, {
+      ...payload,
+      email: payload.username,
+    });
     dispatch({
       type: 'signIn',
       payload: { username: user.username, token: user.token },
