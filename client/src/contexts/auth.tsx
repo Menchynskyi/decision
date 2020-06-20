@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import { User, SignInPayload, SignUpPayload } from 'types';
 
-type State = {
+export type State = {
   isLoggedIn: boolean;
   user: User | null;
 };
