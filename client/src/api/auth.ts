@@ -1,8 +1,9 @@
 import { Action } from 'contexts';
 import { SignUpPayload, User, SignInPayload } from 'types';
 import axios from 'axios';
+import Constants from 'expo-constants';
 
-const apiUrl = 'http://192.168.0.103:8080';
+const { apiUrl } = Constants.manifest.extra;
 
 type UserResponse = { data: User };
 
