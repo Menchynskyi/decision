@@ -11,7 +11,8 @@ export type Action =
       type: 'signIn';
       payload: User;
     }
-  | { type: 'signUp'; payload: User };
+  | { type: 'signUp'; payload: User }
+  | { type: 'signOut' };
 
 export type AuthContextState = {
   state: State;
@@ -39,6 +40,13 @@ const authReducer = (state: State, action: Action): State => {
         ...state,
         isLoggedIn: true,
         user: action.payload,
+      };
+    }
+    case 'signOut': {
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
       };
     }
     default: {

@@ -2,13 +2,18 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SignIn, SignUp } from 'screens';
-import { useAuthState } from 'hooks';
-import { SafeAreaView, Text } from 'react-native';
+import { useAuthState, useAuthDispatch } from 'hooks';
+import { SafeAreaView, Text, TouchableOpacity } from 'react-native';
 
 const Stack = createStackNavigator();
 
 export const App: React.FC = () => {
   const { isLoggedIn, user } = useAuthState();
+  const dispatch = useAuthDispatch();
+
+  const handleSignOut = () => {
+    dispatch({ type: 'signOut' });
+  };
 
   if (!isLoggedIn)
     return (
@@ -23,6 +28,9 @@ export const App: React.FC = () => {
   return (
     <SafeAreaView>
       <Text>{`Hello ${user?.username}`}</Text>
+      <TouchableOpacity onPress={handleSignOut}>
+        <Text>Sign Out!</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
