@@ -12,6 +12,8 @@ module.exports = api => {
             hooks: './src/hooks/',
             screens: './src/screens/',
             utils: './src/utils/',
+            contexts: './src/contexts/',
+            types: './src/types',
           },
         },
       ],

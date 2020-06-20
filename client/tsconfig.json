@@ -15,6 +15,21 @@
     "paths": {
       "components": [
         "./components"
+      ],
+      "hooks": [
+        "./hooks/"
+      ],
+      "screens": [
+        "./screens/"
+      ],
+      "utils": [
+        "./utils/"
+      ],
+      "contexts": [
+        "./contexts/"
+      ],
+      "types": [
+        "./types"
       ]
     }
   }
