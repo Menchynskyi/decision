@@ -8,17 +8,22 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Input } from 'components';
-import { useForm, useAuthDispatch } from 'hooks';
+import { useForm, useAuthDispatch, useAuthState } from 'hooks';
 import { validatePassword, validateUsername } from 'utils';
 import { signIn } from 'api';
 import { styles } from './SignIn.style';
 
 export const SignIn: React.FC = () => {
   const navigation = useNavigation();
+  const dispatch = useAuthDispatch();
+  const {
+    isLoading,
+    signInError: { isError, errorMessage },
+  } = useAuthState();
+
   const handlePress = () => {
     navigation.navigate('SignUp');
   };
-  const dispatch = useAuthDispatch();
 
   const { changeHandlers, handleSubmit, values, dirty, errors } = useForm({
     initialValues: {
@@ -57,6 +62,8 @@ export const SignIn: React.FC = () => {
             </View>
           </TouchableOpacity>
         </View>
+        {isLoading && <Text>Wait a sec...</Text>}
+        {isError && <Text>{errorMessage}</Text>}
         <TouchableOpacity onPress={handlePress}>
           <View>
             <Text style={styles.text}>or Sign Up</Text>

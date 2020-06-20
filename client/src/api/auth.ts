@@ -11,6 +11,7 @@ export const signUp = async (
   payload: SignUpPayload
 ) => {
   if (!Object.values(payload).every(field => field?.trim())) return;
+  dispatch({ type: 'loading' });
   try {
     const { data: user }: UserResponse = await axios.post(
       `${apiUrl}/signup`,
@@ -21,6 +22,7 @@ export const signUp = async (
       payload: { username: user.username, token: user.token },
     });
   } catch (e) {
+    dispatch({ type: 'signUpError', payload: e.message });
     throw new Error(e.message);
   }
 };
@@ -30,6 +32,7 @@ export const signIn = async (
   payload: SignInPayload
 ) => {
   if (!Object.values(payload).every(field => field?.trim())) return;
+  dispatch({ type: 'loading' });
   try {
     const { data: user }: UserResponse = await axios.post(`${apiUrl}/signIn`, {
       ...payload,
@@ -40,6 +43,7 @@ export const signIn = async (
       payload: { username: user.username, token: user.token },
     });
   } catch (e) {
+    dispatch({ type: 'signInError', payload: e.message });
     throw new Error(e.message);
   }
 };

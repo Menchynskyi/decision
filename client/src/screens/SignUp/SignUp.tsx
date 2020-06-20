@@ -7,7 +7,7 @@ import {
   Keyboard,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useForm, useAuthDispatch } from 'hooks';
+import { useForm, useAuthDispatch, useAuthState } from 'hooks';
 import { Input } from 'components';
 import { validateEmail, validateUsername, validatePassword } from 'utils';
 import { signUp } from 'api';
@@ -15,10 +15,15 @@ import { styles } from './SignUp.style';
 
 export const SignUp: React.FC = () => {
   const navigation = useNavigation();
+  const dispatch = useAuthDispatch();
+  const {
+    isLoading,
+    signInError: { isError, errorMessage },
+  } = useAuthState();
+
   const handlePress = () => {
     navigation.navigate('SignIn');
   };
-  const dispatch = useAuthDispatch();
 
   const { changeHandlers, handleSubmit, dirty, values, errors } = useForm({
     initialValues: {
@@ -66,6 +71,8 @@ export const SignUp: React.FC = () => {
             </View>
           </TouchableOpacity>
         </View>
+        {isLoading && <Text>Wait a sec...</Text>}
+        {isError && <Text>{errorMessage}</Text>}
         <TouchableOpacity onPress={handlePress}>
           <View>
             <Text style={styles.text}>or Sign Up</Text>
