@@ -18,7 +18,7 @@ export const SignUp: React.FC = () => {
   const dispatch = useAuthDispatch();
   const {
     isLoading,
-    signInError: { isError, errorMessage },
+    signUpError: { isError, errorMessage },
   } = useAuthState();
 
   const handlePress = () => {

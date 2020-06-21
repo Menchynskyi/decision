@@ -13,6 +13,16 @@ export const signup = async (req, res) => {
   }
 
   try {
+    const userByEmail = await User.findOne({ email: req.body.email });
+    const userByUsername = await User.findOne({ username: req.body.username });
+
+    if (userByEmail) {
+      return res.status(400).send({ message: 'This email already exists' });
+    }
+    if (userByUsername) {
+      return res.status(400).send({ message: 'This username already exists' });
+    }
+
     const user = await User.create(req.body);
     const token = newToken(user);
     return res.status(201).send({ token, username: user.username });

@@ -23,8 +23,10 @@ export const signUp = async (
       payload: { username: user.username, token: user.token },
     });
   } catch (e) {
-    dispatch({ type: 'signUpError', payload: e.message });
-    throw new Error(e.message);
+    if (e.response) {
+      dispatch({ type: 'signUpError', payload: e.response.data.message });
+    }
+    throw new Error(e);
   }
 };
 
@@ -44,7 +46,9 @@ export const signIn = async (
       payload: { username: user.username, token: user.token },
     });
   } catch (e) {
-    dispatch({ type: 'signInError', payload: e.message });
-    throw new Error(e.message);
+    if (e.response) {
+      dispatch({ type: 'signInError', payload: e.response.data.message });
+    }
+    throw new Error(e);
   }
 };
