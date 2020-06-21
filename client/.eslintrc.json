@@ -64,7 +64,8 @@
         "react/prop-types": "off",
         "react/jsx-props-no-spreading": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "import/no-unresolved": "off"
+        "import/no-unresolved": "off",
+        "consistent-return": "off"
     },
     "settings": {
         "import/resolver": {

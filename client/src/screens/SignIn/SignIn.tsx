@@ -8,14 +8,13 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Input } from 'components';
-import { useForm, useAuthDispatch, useAuthState } from 'hooks';
+import { useForm, useAuthState, useAuth } from 'hooks';
 import { validatePassword, validateUsername } from 'utils';
-import { signIn } from 'api';
 import { styles } from './SignIn.style';
 
 export const SignIn: React.FC = () => {
   const navigation = useNavigation();
-  const dispatch = useAuthDispatch();
+  const { signIn } = useAuth();
   const {
     isLoading,
     signInError: { isError, errorMessage },
@@ -31,7 +30,7 @@ export const SignIn: React.FC = () => {
       password: '',
     },
     onSubmit: val => {
-      signIn(dispatch, val);
+      signIn(val);
     },
     validationSchema: {
       username: validateUsername,

@@ -22,6 +22,7 @@ export const signUp = async (
       type: 'signUp',
       payload: { username: user.username, token: user.token },
     });
+    return user;
   } catch (e) {
     if (e.response) {
       dispatch({ type: 'signUpError', payload: e.response.data.message });
@@ -45,6 +46,7 @@ export const signIn = async (
       type: 'signIn',
       payload: { username: user.username, token: user.token },
     });
+    return user;
   } catch (e) {
     if (e.response) {
       dispatch({ type: 'signInError', payload: e.response.data.message });

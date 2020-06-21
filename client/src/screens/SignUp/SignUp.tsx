@@ -7,15 +7,14 @@ import {
   Keyboard,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useForm, useAuthDispatch, useAuthState } from 'hooks';
+import { useForm, useAuthState, useAuth } from 'hooks';
 import { Input } from 'components';
 import { validateEmail, validateUsername, validatePassword } from 'utils';
-import { signUp } from 'api';
 import { styles } from './SignUp.style';
 
 export const SignUp: React.FC = () => {
   const navigation = useNavigation();
-  const dispatch = useAuthDispatch();
+  const { signUp } = useAuth();
   const {
     isLoading,
     signUpError: { isError, errorMessage },
@@ -32,7 +31,7 @@ export const SignUp: React.FC = () => {
       password: '',
     },
     onSubmit: val => {
-      signUp(dispatch, val);
+      signUp(val);
     },
     validationSchema: {
       email: validateEmail,

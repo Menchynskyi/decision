@@ -4,3 +4,4 @@ export {
   useAuthDispatch,
   useAuthState,
 } from './useAuthContext';
+export { useInitialAuth, useAuth } from './useAuth';
