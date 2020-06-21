@@ -14,8 +14,8 @@ export const useInitialAuth = () => {
     try {
       const storageInfo = await AsyncStorage.getItem(storageUser);
       if (!storageInfo) return;
-      const userInfo: User = JSON.parse(storageInfo);
 
+      const userInfo: User = JSON.parse(storageInfo);
       if (userInfo && userInfo.token) {
         dispatch({ type: 'signIn', payload: userInfo });
       }
@@ -51,16 +51,24 @@ export const useAuth = () => {
   }, []);
 
   const signIn = async (val: SignInPayload) => {
-    const userInfo = await signInApi(dispatch, val);
-    if (userInfo) {
-      setUserInfo(userInfo);
+    try {
+      const userInfo = await signInApi(dispatch, val);
+      if (userInfo) {
+        setUserInfo(userInfo);
+      }
+    } catch (e) {
+      throw new Error(e);
     }
   };
 
   const signUp = async (val: SignUpPayload) => {
-    const userInfo = await signUpApi(dispatch, val);
-    if (userInfo) {
-      setUserInfo(userInfo);
+    try {
+      const userInfo = await signUpApi(dispatch, val);
+      if (userInfo) {
+        setUserInfo(userInfo);
+      }
+    } catch (e) {
+      throw new Error(e);
     }
   };
 
