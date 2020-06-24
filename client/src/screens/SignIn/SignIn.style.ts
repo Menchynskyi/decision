@@ -21,12 +21,12 @@ export const styles = StyleSheet.create({
   submitButton: {
     paddingVertical: 10,
     marginBottom: 10,
-    backgroundColor: '#87ace6',
+    backgroundColor: '#83D4FF',
     alignItems: 'center',
     borderRadius: 5,
   },
   disabled: {
-    backgroundColor: '#bababa',
+    backgroundColor: '#BABABA',
   },
   submitText: {
     fontSize: 18,

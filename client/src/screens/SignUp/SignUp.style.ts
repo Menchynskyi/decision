@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: '#616161',
+    color: '#52595C',
   },
   mainInfo: {
     fontSize: 50,
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   submitButton: {
     paddingVertical: 10,
     marginBottom: 10,
-    backgroundColor: '#87ace6',
+    backgroundColor: '#83D4FF',
     alignItems: 'center',
     borderRadius: 5,
   },

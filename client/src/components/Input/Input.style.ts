@@ -4,9 +4,10 @@ export const styles = StyleSheet.create({
   input: {
     padding: 10,
     borderWidth: 1,
-    borderColor: '#333333',
+    borderColor: '#52595C',
     borderRadius: 5,
     fontSize: 18,
+    color: '#52595C',
   },
   inputError: {
     borderColor: '#FF6767',
