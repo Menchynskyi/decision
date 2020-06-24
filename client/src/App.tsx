@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SignIn, SignUp, Home, Settings } from 'screens';
 import { useInitialAuth } from 'hooks';
+import { StatusBar } from 'react-native';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -14,6 +15,7 @@ export const App: React.FC = () => {
   return (
     <NavigationContainer>
       <>
+        <StatusBar barStyle="dark-content" />
         {!isLoggedIn ? (
           <Stack.Navigator headerMode="none">
             <Stack.Screen name="SignIn" component={SignIn} />
